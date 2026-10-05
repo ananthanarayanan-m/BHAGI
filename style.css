@@ -1,0 +1,362 @@
+/* ── Design tokens ── */
+:root {
+    --bg: #080808;
+    --y: #f5c63c;
+    --t: #f5e7b8;
+}
+
+html {
+    box-sizing: border-box;
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--t);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100svh;
+    overflow-x: hidden;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Starfield canvas ── */
+#stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ════════════════════════
+   DESKTOP — two columns,
+   SU logo pinned top-left
+   ════════════════════════ */
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 6vw;
+}
+
+/* Ambient golden glow */
+.hero::before {
+    content: "";
+    position: absolute;
+    right: 5%;
+    top: -8%;
+    width: 55vw;
+    height: 80vh;
+    background: radial-gradient(ellipse at 60% 0, rgba(245, 198, 60, .18), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* SU logo — absolute, top-left corner on desktop */
+.su {
+    position: absolute;
+    top: calc(1.6rem + env(safe-area-inset-top, 0px));
+    left: 4vw;
+    z-index: 10;
+}
+
+.su img {
+    height: clamp(28px, 3.2vw, 42px);
+    width: auto;
+    mix-blend-mode: lighten;
+    display: block;
+}
+
+/* Left content column */
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Bhagi typo logo */
+.typo {
+    width: min(100%, 580px);
+    mix-blend-mode: lighten;
+    display: block;
+    margin-left: -1.5%;
+    filter: drop-shadow(0 0 28px rgba(245, 198, 60, .12));
+}
+
+/* Decorative glowing divider */
+.divider {
+    margin-top: 1.8rem;
+    height: 1px;
+    width: min(340px, 88%);
+    background: linear-gradient(90deg, transparent, rgba(245, 198, 60, .65) 50%, transparent);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f5c63c;
+    box-shadow: 0 0 10px 3px rgba(245, 198, 60, .75);
+}
+
+/* Read Magazine button */
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    /* Gold gradient background */
+    background: linear-gradient(135deg, #e6a800 0%, #f5c63c 45%, #ffe278 75%, #f5c63c 100%);
+    background-size: 200% 200%;
+    color: #1a1000;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: clamp(.9rem, 1.3vw, 1.2rem);
+    letter-spacing: .18em;
+    padding: .85rem 2rem;
+    border-radius: 50px; /* pill shape */
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 2.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 220, 80, .5);
+    box-shadow:
+        0 0 0 0 rgba(245, 198, 60, 0),
+        inset 0 1px 0 rgba(255,255,255,.25);
+    transition:
+        transform .3s cubic-bezier(.23,1,.32,1),
+        box-shadow .3s ease,
+        background-position .6s ease;
+}
+
+/* Glint sweep overlay */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,.45) 50%,
+        transparent 100%
+    );
+    animation: glint 3.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glint {
+    0%   { left: -75%; opacity: 0; }
+    15%  { opacity: 1; }
+    50%  { left: 130%; opacity: 1; }
+    51%  { opacity: 0; }
+    100% { left: 130%; opacity: 0; }
+}
+
+.btn svg {
+    flex-shrink: 0;
+    transition: transform .3s cubic-bezier(.23,1,.32,1);
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    background-position: right center;
+    box-shadow:
+        0 0 0 3px rgba(245, 198, 60, .25),
+        0 12px 40px rgba(245, 198, 60, .55),
+        0 4px 12px rgba(0,0,0,.3);
+}
+
+.btn:hover svg {
+    transform: translate(4px, -4px) scale(1.15);
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(.98);
+    box-shadow: 0 4px 16px rgba(245, 198, 60, .4);
+}
+
+/* Book cover */
+.book {
+    width: 100%;
+    max-width: 600px;
+    justify-self: center;
+    mix-blend-mode: lighten;
+    transition: transform .2s;
+    animation: fl 6s ease-in-out infinite;
+    filter: drop-shadow(0 20px 50px rgba(245, 198, 60, .1));
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Marquee ticker strip ── */
+.ticker {
+    position: absolute;
+    bottom: 1.6rem;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    z-index: 10;
+    background: transparent;
+    padding: .55rem 0;
+    white-space: nowrap;
+}
+
+.ticker-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee 22s linear infinite;
+}
+
+.ticker-track span {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(.6rem, .9vw, .78rem);
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #8a7a45;
+    flex-shrink: 0;
+}
+
+/* The separator dot becomes golden */
+.ticker-track span::after {
+    color: var(--y);
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-33.333%); }
+}
+
+/* Pause on hover */
+.ticker:hover .ticker-track {
+    animation-play-state: paused;
+}
+
+@keyframes fl {
+    50% { translate: 0 -16px; }
+}
+
+/* Shimmer text */
+.shimmer-text {
+    background: linear-gradient(90deg, #c9a84c 0%, #f5e7b8 35%, #f5c63c 50%, #f5e7b8 65%, #c9a84c 100%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+    to { background-position: 220% center; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .book { animation: none; }
+    .shimmer-text { animation: none; }
+}
+
+/* ════════════════════════════════════════
+   MOBILE — single column, stacked order:
+   1. logo.png  — centered at top
+   2. typo.png  — centered
+   3. button    — centered
+   4. book.png  — centered bottom
+   ════════════════════════════════════════ */
+@media (max-width: 800px) {
+    .hero {
+        /* Switch to single column flex so we can control order easily */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        padding: 0 7vw 4rem;
+        gap: 0;
+        min-height: 100svh;
+    }
+
+    /* 1️⃣  SU logo — first, top-center, NOT absolute on mobile */
+    .su {
+        position: static;  /* override desktop absolute */
+        order: 1;
+        padding: calc(1.4rem + env(safe-area-inset-top, 0px)) 0 1.4rem;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .su img {
+        height: 32px;
+        margin: 0 auto;
+    }
+
+    /* 2️⃣  Content (typo + divider + button) */
+    .content {
+        order: 2;
+        align-items: center;
+        width: 100%;
+        margin-top: 1.8rem;
+    }
+
+    .typo {
+        margin-left: 0;
+        width: min(100%, 320px);
+        margin: 0 auto;
+    }
+
+    .divider {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn {
+        margin-top: 2rem;
+        font-size: 1.1rem;
+        padding: .8rem 1.8rem;
+    }
+
+    /* 3️⃣  Book cover — last */
+    .book {
+        order: 3;
+        max-width: 300px;
+        width: 85%;
+        margin: 2.5rem auto 0;
+        justify-self: unset;
+    }
+
+    /* Extra bottom padding so ticker doesn't overlap content */
+    .hero {
+        padding-bottom: 5rem;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+    .typo  { width: 95%; }
+    .book  { max-width: 240px; }
+    .btn   { font-size: .95rem; padding: .7rem 1.4rem; }
+}

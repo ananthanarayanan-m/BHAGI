@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Bhagi — College Magazine 2026</title>
+    <meta name="description" content="Bhagi — The annual college magazine of College of Engineering Vadakara, 2026.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Starry background canvas -->
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <main class="hero">
+
+        <!-- SU Logo — desktop: top-left corner | mobile: top-center -->
+        <header class="su">
+            <img alt="Students Union 2026, College of Engineering Vadakara" src="assets/logo.png">
+        </header>
+
+        <!-- Content: Bhagi typo + button -->
+        <div class="content">
+            <img class="typo" alt="Bhagi" src="assets/typo.png">
+            <div class="divider" aria-hidden="true"></div>
+            <a class="btn" id="read" href="https://heyzine.com/flip-book/c5a88bbf30.html" target="_blank"
+                rel="noopener noreferrer">
+                <span>Read Magazine</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Book cover -->
+        <img class="book" id="book" alt="Bhagi College Magazine 2026 cover" src="assets/book.png">
+
+        <!-- Marquee ticker strip at bottom -->
+        <div class="ticker" aria-label="College of Engineering Vadakara — College Magazine 2026">
+            <div class="ticker-track">
+                <!-- Duplicated for seamless loop -->
+                <span>COLLEGE OF ENGINEERING VADAKARA &nbsp;&nbsp;|&nbsp;&nbsp; COLLEGE MAGAZINE · 2026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>COLLEGE OF ENGINEERING VADAKARA &nbsp;&nbsp;|&nbsp;&nbsp; COLLEGE MAGAZINE · 2026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>COLLEGE OF ENGINEERING VADAKARA &nbsp;&nbsp;|&nbsp;&nbsp; COLLEGE MAGAZINE · 2026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
