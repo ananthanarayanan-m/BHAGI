@@ -1,5 +1,5 @@
 // Set your flipbook / PDF link here (e.g., Heyzine, FlipHTML5, Google Drive, or assets/magazine.pdf)
-const MAGAZINE_URL = "https://heyzine.com/flip-book/c5a88bbf30.html";
+const MAGAZINE_URL = "https://heyzine.com/flip-book/fc5d6c62a7.html";
 
 const r = document.getElementById('read');
 if (r) {
